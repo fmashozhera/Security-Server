@@ -1,0 +1,82 @@
+﻿@model SecureTokenServer.Models.RegisterClientViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_ClientsLayout.cshtml";
+}
+
+<div class="row page-header">
+    <div class="col-sm-10 ml-2">
+        <h1 class="page-header">
+            Registere A Client
+        </h1>
+    </div>
+</div>
+
+<hr class="page-header-underline" />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @Html.HiddenFor(t => t.Id)
+
+            <div class="form-group row">
+                <label asp-for="ClientId" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="ClientId" class="form-control form-control-sm" readonly />
+                    <span asp-validation-for="ClientId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ClientName" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="ClientName" class="form-control form-control-sm" />
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Description" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="Description" class="form-control form-control-sm" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ClientUri" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="ClientUri" class="form-control form-control-sm" />
+                    <span asp-validation-for="ClientUri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="RedirectUri" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="RedirectUri" class="form-control form-control-sm" />
+                    <span asp-validation-for="RedirectUri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="PostLogoutRedirectUri" class="control-form-label col-md-3 form-control-sm"></label>
+                <div class="col-md-7">
+                    <input asp-for="PostLogoutRedirectUri" class="form-control form-control-sm" />
+                    <span asp-validation-for="PostLogoutRedirectUri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-7 offset-3">
+                    <input type="submit" value="Update" class="btn btn-sm btn-success" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

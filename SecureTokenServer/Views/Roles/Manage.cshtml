@@ -1,0 +1,64 @@
+﻿@model List<SecureTokenServer.Models.RoleResourceVm>
+
+@{
+    Layout = "~/Views/Shared/_AccessControlLayout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <h1 class="page-header">
+            Manage Role:
+        </h1>
+    </div>
+    <div class="row alert alert-info">
+        <div class="row m0 p0 client-manager-info">
+            <div class="col-6">
+                <strong>Role Name :</strong>  @ViewData["RoleName"] <br />
+            </div>
+        </div>
+    </div>
+    <hr class="page-header-underline" />
+
+
+    <div class="row ">
+        <form asp-action="Manage">
+            <table class="table table-sm table-striped table-bordered table-compact">
+                <thead>
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>Scopes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        @Html.HiddenFor(t => Model[i].ResourceName)
+                        <tr>
+                            <td>
+                                <input type="text" readonly="readonly" asp-for="@Model[i].ResourceName" />
+                            </td>
+                            <td>
+                                @for (var k = 0; k < Model[i].ResourceClaims.Count; k++)
+                                {
+                                <span style="border:1px solid silver;background-color:silver;" class="mr-1">
+                                    <input type="text" readonly="readonly" asp-for="@Model[i].ResourceClaims[k].ScopeName" class="input-sm m-0 p-0" />
+                                    @Html.HiddenFor(t => Model[i].ResourceClaims[k].ScopeName)
+                                    @Html.HiddenFor(t => Model[i].ResourceClaims[k].Assigned)
+                                    <input type="checkbox" asp-for="@Model[i].ResourceClaims[k].Assigned" class="input-sm ml-0" onchange="manageResource(this,this.checked)" data-url="@Url.Action("Manage",new { roleId = ViewData["RoleId"],resourceName=Model[i].ResourceName,scopeName=Model[i].ResourceClaims[k].ScopeName})"/>
+                                </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <input type="submit" value="Update Role" class="btn btn-sm btn-success" asp-route-roleName="@ViewData["RoleName"]"/>
+        </form>
+
+    </div>
+
+</div>
+
+
+

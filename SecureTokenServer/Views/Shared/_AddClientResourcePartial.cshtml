@@ -1,0 +1,35 @@
+﻿@model SecureTokenServer.Models.AssignClientResourceVm
+
+<div class="modal fade" id="createScopeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Resource</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-sm table-bordered table-compact">
+                    <tbody>
+                        @foreach (var resource in Model.Resources)
+                        {
+                            <tr>
+                                <td>@resource</td>
+                                <td>
+                                    <form asp-action="AssignResource" asp-route-clientName="@Model.ClientName" asp-route-resourceName="@resource" id="add-scope">
+                                        <a class="btn btn-sm action-btn" data-save="modal" asp-controller="Clients" asp-route-clientName="@Model.ClientName" asp-route-resourceName="@resource" asp-action="AssignResource" title="Assign Resource"> <i class="fas fa-plus-square icon-btn"></i></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

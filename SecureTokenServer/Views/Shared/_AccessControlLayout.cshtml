@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "_AccessControlLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="row">
+        <div class="col-md-2 left-menu">
+            <nav class="nav flex-column side-menu pt-2">
+                <a class="nav-link active p-0" asp-controller="Roles" asp-action="Index">Roles</a>
+                <hr class="m-0 p-0" />
+                <a class="nav-link active p-0" asp-controller="Roles" asp-action="Create" title="Create Role">Create Role</a>
+                <hr class="m-0 p-0" />
+            </nav>
+        </div>
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+

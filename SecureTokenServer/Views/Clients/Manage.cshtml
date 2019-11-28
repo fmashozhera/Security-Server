@@ -1,0 +1,72 @@
+﻿@model SecureTokenServer.Models.ManageClientVm
+
+@{
+    Layout = "~/Views/Shared/_ClientsLayout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <h1 class="page-header">
+            Manage Client:
+        </h1>
+    </div>
+    <div class="row alert alert-info">
+        <div class="row m0 p0 client-manager-info">
+            <div class="col-6">
+                <strong>Resource Name :</strong>  @Model.ClientName <br />
+                <strong>Description   :</strong> @Model.Description <br />
+                @*<dt>Display Name</dt>
+                    <dd>@Model.DisplayName</dd>*@
+            </div>
+            <div class="col-6">
+                <strong>Client Uri :</strong> @Model.ClientUri <br />
+                <strong>Redirect Uri :</strong> @Model.RedirectUri <br />
+                <strong>Post Logout Redirect Uri :</strong> @Model.PostLogoutRedirectUri           
+            </div>
+        </div>
+    </div>
+
+
+    <hr class="page-header-underline" />
+    <div class="row ">
+        <button type="button" class="btn btn-primary btn-sm action-btn mb-1" data-toggle="add-client-resource" data-target="#modal-container" data-url="@Url.Action("GetResources","Clients",new { clientName = Model.ClientName})">
+            Add Resource
+        </button>
+
+        <div id="modal-container">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered table-compact">
+                <thead>
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>DisplayName</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var resource in Model.ClientResources)
+                    {
+                        <tr>
+                            <td>@resource.ResourceName</td>
+                            <td>@resource.DisplayName</td>
+                            <td>@resource.ResourceDescription</td>
+                            <td>
+                                <button type="button" class="btn  btn-sm action-btn" data-toggle="delete-client-resource" data-target="#modal-container" data-url="@Url.Action("ConfirmResourceUnassignment",new { clientName = Model.ClientName,resourceName=resource.ResourceName})" title="Unassign Resource">
+                                    <i class="fas fa-minus-square icon-btn"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+

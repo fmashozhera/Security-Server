@@ -1,0 +1,108 @@
+﻿@model IEnumerable<IdentityServer4.Models.Client>
+
+@{
+    Layout = "_ClientsLayout";
+}
+
+<div class="grants">
+    <div class="row page-header">
+        <div class="col-sm-10">
+            <h1>
+                Registered Clients
+            </h1>
+        </div>
+    </div>
+
+    @if (Model.Any() == false)
+    {
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="alert alert-info">
+                    You have not given access to any applications
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered table-compact">
+                <thead>
+                    <tr>
+                        <th scope="col">Client Name</th>
+                        <th scope="col">Client Id</th>
+                        <th scope="col">Uris</th>
+                        <th scope="col">Client Scopes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var client in Model)
+                    {
+                        <tr>
+                            <td>@client.ClientName</td>
+                            <td>@client.ClientId</td>
+                            <td>
+                                <ul>
+                                    @if (client.RedirectUris.Any())
+                                    {
+                                        <li>
+                                            <table class="table-bordered table-sm table-striped mb-1">
+                                                <tr>
+                                                    <td>Redirect Uris</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach (var uri in client.RedirectUris)
+                                                            {
+                                                                <li>@uri</li>
+                                                            }
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    }
+                                    @if (client.PostLogoutRedirectUris.Any())
+                                    {
+                                        <li>
+                                            <table class="table-bordered table-sm table-striped">
+                                                <tr>
+                                                    <td>Post Logout Redirect Uris</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach (var uri in client.PostLogoutRedirectUris)
+                                                            {
+                                                                <li>@uri</li>
+                                                            }
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    }
+                                </ul>
+
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach (var item in client.AllowedScopes)
+                                    {
+                                        <li>
+                                            @item
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm action-btn" asp-controller="Clients" asp-route-clientId="@client.ClientId" asp-action="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-sm action-btn" asp-controller="Clients" asp-route-clientId="@client.ClientId" asp-action="Manage" title="Manage Client"> <i class="fas fa-tasks icon-btn"></i></a>                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,26 @@
+@model LoginViewModel
+
+<div class="login-page">
+    <partial name="_ValidationSummary" />
+    @if (Model.VisibleExternalProviders.Any())
+    {
+
+        <div class="container h-100 d-flex justify-content-center mt-4">
+            <ul class="list-inline" id="external-logins">
+                @foreach (var provider in Model.VisibleExternalProviders)
+                {
+                    <li class="external-login-btn">
+                        <a class="btn btn-default"
+                           asp-controller="External"
+                           asp-action="Challenge"
+                           asp-route-provider="@provider.AuthenticationScheme"
+                           asp-route-returnUrl="@Model.ReturnUrl">
+                            <img src="~/images/office365.png" /><br />
+                            <h1>Login with @provider.DisplayName</h1>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

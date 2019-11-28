@@ -1,0 +1,63 @@
+﻿@model SecureTokenServer.Models.ApiResourceScopeViewModel
+
+<div class="modal fade" id="createClaimModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Claim</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddClaim" id="add-claim">
+                    @Html.HiddenFor(Model => Model.ApiResourceName)
+                    @Html.HiddenFor(Model => Model.Name)
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <label asp-for="ActiveClaim.Type" class="control-form-label col-md-3 form-control-sm"></label>
+                        <div class="col-md-9">
+                            <input asp-for="ActiveClaim.Type" class="form-control form-control-sm" />
+                            <span asp-validation-for="ActiveClaim.Type" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <button type="button" class="btn btn-sm btn-success action-btn mb-1" data-save="modal">Save</button>
+                        </div>
+                    </div>
+                    
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-compact" id="claims-table">
+                        <thead>
+                            <tr>
+                                <th>Claim Type</th>                               
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="claims">
+                            @foreach (var claim in Model.UserClaims)
+                            {
+                                <tr >
+                                    <td>@claim</td>                                   
+                                    <td>                                        
+                                        <button type="button" class="btn btn-sm action-btn claim-btn" data-delete="claim" data-url="@Url.Action("RemoveClaim",new { apiResourceName = Model.ApiResourceName,scopeName=Model.Name,claimType=claim})">
+                                            <i class="fas fa-minus-square"></i>
+                                        </button>                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>                       
+            </div>
+        </div>
+    </div>
+</div>

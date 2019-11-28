@@ -1,0 +1,48 @@
+﻿@model SecureTokenServer.Models.ApiResourceScopeViewModel
+
+<div class="modal fade" id="createScopeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Scope</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddScope" id="add-scope">
+                    @Html.HiddenFor(Model => Model.ApiResourceName)
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <label asp-for="Name" class="control-form-label col-md-3 form-control-sm"></label>
+                        <div class="col-md-9">
+                            <input asp-for="Name" class="form-control form-control-sm" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="DisplayName" class="control-form-label col-md-3 form-control-sm"></label>
+                        <div class="col-md-9">
+                            <input asp-for="DisplayName" class="form-control form-control-sm" />
+                            <span asp-validation-for="DisplayName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Description" class="control-form-label col-md-3 form-control-sm"></label>
+                        <div class="col-md-9">
+                            <textarea asp-for="Description" class="form-control form-control-sm mb-1" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-success" data-save="modal">Save</button>                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "_ClientsLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="row">
+        <div class="col-md-2 left-menu">
+            <nav class="nav flex-column side-menu pt-2">
+                <a class="nav-link active p-0" asp-controller="Clients" asp-action="Index">Registered Clients</a>
+                <hr class="m-0 p-0" />
+                <a class="nav-link p-0" asp-controller="Clients" asp-action="Register">Register Client</a>
+                <hr class="m-0 p-0" />
+                <a class="nav-link p-0" asp-controller="Clients" asp-action="Edit">Edit Client</a>
+            </nav>
+        </div>
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+

@@ -1,0 +1,60 @@
+﻿@model SecureTokenServer.Models.ManageApiResourceViewModel
+
+@{
+    Layout = "~/Views/Shared/_ResourcesLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row page-header">
+        <div class="ml-2">
+            <h1 class="page-header">
+                Manage Resource:
+            </h1>
+            <em> <span style="font-weight:600;">Resource Name :</span> @Model.Name&nbsp;&nbsp;&nbsp;<span style="font-weight:600;">Display Name :</span> @Model.DisplayName&nbsp;&nbsp;&nbsp; <span style="font-weight:600;"> Description :</span> @Model.Description</em>
+        </div>
+    </div>
+
+    <hr class="page-header-underline" />
+    <div class="row ">       
+
+        <div id="modal-container">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered table-compact">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>DisplayName</th>                                           
+                        <th>Claims</th>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var scope in Model.Scopes)
+                    {
+                        <tr>
+                            <td>@scope.Name</td>
+                            <td>@scope.DisplayName</td>                        
+                            <td>
+                                @foreach (var claim in scope.UserClaims)
+                                {
+                                    <span>@claim;</span>
+                                }
+                            </td>
+                            <td>
+                                <button type="button" class="btn  btn-sm action-btn" data-toggle="manage-modal" data-target="#createScopeModal" data-url="@Url.Action("ManageScope",new { resourceName = Model.Name,scopeName=scope.Name})" title="Add / Remove claim">
+                                    <i class="fas fa-tasks icon-btn"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
